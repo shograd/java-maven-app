@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo "Building ... "
-                    withCredentials([usernamePassword(credentialsID: '178612e7-7c15-4fd5-9960-830cc1c0ae80', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: '178612e7-7c15-4fd5-9960-830cc1c0ae80', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'docker build -t shograd/demo-app:jma-2.0 .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh 'docker push shograd/demo-app:jma-2.0'
