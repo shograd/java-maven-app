@@ -16,10 +16,11 @@ pipeline {
             steps {
                 script {
                     echo "Building ... "
-                    withCredentials([usernamePassword(credentialsID: 'github-cred', passwordVariable: 'PASS', usernameVariable: 'USER')])
+                    withCredentials([usernamePassword(credentialsID: 'github-cred', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'docker build -t shograd/demo-app:jma-2.0 .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
                         sh 'docker push shograd/demo-app:jma-2.0'
+                    }
                 }
             }
         }
