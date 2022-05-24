@@ -1,20 +1,33 @@
 pipeline {
     agent any
-    
+    tools {
+        maven = 'maven-3.8'
+    }
     stages {
-        stage('Build') {
+        stage('Build jar') {
             steps {
-                echo 'Building ... '
+                script {
+                    echo "Building ... "
+                    sh 'mvn package'
+                }
             }
         }
-        stage('Test') {
+        stage('Build image') {
             steps {
-                echo 'Testing ... '
+                script {
+                    echo "Building ... "
+                    withCredentials([usernamePassword(credentialsID: 'github-cred', passwordVariable: 'PASS', usernameVariable: 'USER')])
+                        sh 'docker build -t shograd/demo-app:jma-2.0 .'
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
+                        sh 'docker push shograd/demo-app:jma-2.0'
+                }
             }
         }
         stage('Deliver') {
             steps {
-                echo 'Delivering ...'
+                script {
+                    echo 'Delivering ...'
+                }
             }
         }
     }
