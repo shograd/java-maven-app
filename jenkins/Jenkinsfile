@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     echo "building image"
-                    buildImage('shograd/demo-app:jma-3.0')
+                    buildImage 'shograd/demo-app:jma-3.0'
                 }
             }
         }
