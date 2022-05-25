@@ -12,6 +12,7 @@ pipeline {
         stage("init") {
             steps {
                 script {
+                    echo "load scripts..."
                     gv = load "script.groovy"
                 }
             }
