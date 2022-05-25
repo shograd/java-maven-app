@@ -3,7 +3,8 @@
 library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
         [$class: 'GitSCMSource',
          remote: 'https://shograd:glpat-17RPPxeFNYVtsdwxk4oA@gitlab.com/shograd/jenkins-shared-library.git'
-         )
+         ]
+)
 
 def gv
 
